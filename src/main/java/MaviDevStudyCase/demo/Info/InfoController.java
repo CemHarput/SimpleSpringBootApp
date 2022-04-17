@@ -47,14 +47,6 @@ public class InfoController {
          return "redirect:/list";
 
     }
-
-    @GetMapping()
-    public String getText(Model model){
-
-        return "index";
-
-    }
-
     @GetMapping("/login")
     public String Info_Login(){
 
@@ -67,6 +59,15 @@ public class InfoController {
         return "register";
 
     }
+
+    @GetMapping()
+    public String getText(Model model){
+
+        return "index";
+
+    }
+
+
 
 
 

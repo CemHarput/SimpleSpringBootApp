@@ -1,23 +1,46 @@
 package MaviDevStudyCase.demo.User;
 
-
 import MaviDevStudyCase.demo.Role.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-@Entity @Data
-@NoArgsConstructor @AllArgsConstructor
 
+import java.util.Set;
+
+
+@Entity
+@Getter
+@Setter
+@Table(name = "info_user")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String username;
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+
+
+    @Singular
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name ="user_and_role",
+            joinColumns={@JoinColumn(name="USER_ID",referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name="ROLE_ID",referencedColumnName = "id")})
+    private Set<Role> roles;
+
+    @Builder.Default
+    private Boolean accountNonExpired =true;
+
+    @Builder.Default
+    private Boolean accountNonLocked = true;
+
+    @Builder.Default
+    private Boolean credentialsNonExpired = true;
+
+    @Builder.Default
+    private Boolean enabled=true;
+
+
 }

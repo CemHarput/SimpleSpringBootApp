@@ -19,8 +19,8 @@ public class InfoService {
     public List<Info> getInfos(){
           return infoRepository.findAll();
     }
-    public Info addInfo(Info info){
-         return  infoRepository.save(info);
+    public void addInfo(Info info){
+        infoRepository.save(info);
     }
 
 
