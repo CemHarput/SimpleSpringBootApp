@@ -53,12 +53,7 @@ public class InfoController {
         return "login";
 
     }
-    @GetMapping("/register")
-    public String Info_Register(){
 
-        return "register";
-
-    }
 
     @GetMapping()
     public String getText(Model model){

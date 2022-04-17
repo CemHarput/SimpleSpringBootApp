@@ -75,13 +75,16 @@
             </div>
             <div class="d-flex justify-content-center form_container">
 
-                <form method="POST" action="">
+                <form method="POST" th:action="@{/register}" th:object="${userData}">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                    </div>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
                         <label>
-                            <input type="text" name="username" placeholder="username...">
+                            <input type="text" th:field="*{username}" name="username" placeholder="username..." th:errorclass="is-invalid">
                         </label>
                     </div>
                     <div class="input-group mb-3">
@@ -89,7 +92,7 @@
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
                         <label>
-                            <input type="text" name="role" placeholder="role...">
+                            <input type="text" th:field="*{role}" name="role" placeholder="role...">
                         </label>
                     </div>
 
@@ -98,17 +101,10 @@
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
                         <label>
-                            <input type="text" name="password1" placeholder="Enter the password...">
+                            <input type="text" th:field="*{password}" name="password1" placeholder="Enter the password...">
                         </label>
                     </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                        </div>
-                        <label>
-                            <input type="text" name="password2" placeholder="Retype password...">
-                        </label>
-                    </div>
+
 
                     <div class="d-flex justify-content-center mt-3 login_container">
                         <input class="btn login_btn" type="submit" value="Register Account">
