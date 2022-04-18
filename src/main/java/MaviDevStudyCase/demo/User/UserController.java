@@ -32,7 +32,7 @@ public class UserController {
         }
         try {
             userService.register_user(userData);
-        }catch (DuplicateRequestException e){
+        }catch (Exception e){
             bindingResult.rejectValue("username", "userData.username","An account already exists for this username.");
             model.addAttribute("registrationForm", userData);
             return "/register";
