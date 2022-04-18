@@ -9,6 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,8 @@ public class InfoServiceTest {
 
         Mockito.when(infoRepository.findAll()).thenReturn(infos);
 
+        infoRepository.save(test_info1);
+
 
 
     }
@@ -61,9 +64,19 @@ public class InfoServiceTest {
     }
     @Test
     public void whenUsedAddInfo_ItShouldReturnValidInfo0bject(){
-        infoService.addInfo(test_info1);
-        assertNotNull(test_info1);
-        assertEquals("Ankara",test_info1.getIl());
+
+        List<Info> infos = infoService.getInfos();
+
+
+
+
+        for(Info info : infos){
+            assertEquals(test_info1.getIlce(),info.getIlce());
+
+        }
+
+
+
     }
 
 
